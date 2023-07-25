@@ -1,0 +1,17 @@
+.dnd-wrapper{
+    background-color: rgb(108, 107, 189);
+}
+.dnd-wrapper .sentence {
+    display: inline-block;
+
+}
+.dnd-wrapper .sentence .blank {
+    display: inline-flex;
+    justify-content: center;
+    min-height: 25px;
+    height: fit-content;
+    max-width: max-content;
+    min-width: 120px;
+    color: rgb(209, 0, 70);
+    background-color: aliceblue;
+}
