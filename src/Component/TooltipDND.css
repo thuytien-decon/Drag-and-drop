@@ -1,0 +1,25 @@
+:root {
+    --color1: #3c5599;
+    --color2: rgb(10, 159, 245);
+    --font1: 'Poppins', sans-serif;
+    --fontsize1: 1rem;
+    --font2: sans-serif;
+    --fontsize2: 0.8rem
+}
+
+.tooltip{
+    width:fit-content;
+    height:30px;
+    justify-content: center;
+    align-items: center;
+}
+.tooltip:hover {
+cursor: pointer;
+}
+
+.tooltip input {
+    width: 30px;
+    margin-right: 10px;
+    border-radius: 5px; 
+    text-align: center;
+}
