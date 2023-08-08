@@ -46,35 +46,44 @@ export default function ModalforquestionDND(props) {
         let temporaryListAns = { ...listAns };
         const key = e.target.getAttribute('value');
         const value = temporaryListAns[key];
-        // delete temporaryListAns[key]
-        // setListAns(temporaryListAns)
+        delete temporaryListAns[key]
+        setListAns(temporaryListAns)
         setDelkey(key)
-        const a = document.getElementsByClassName('paragraph')[0].childNodes;
-        const newParagragh = [];
-        for (let i = 0; i < a.length; i++) {
-            console.log('11111', a)
-            // console.log('2222', a[i])
-            if (a[i].nodeName === "SPAN" && a[i].innerHTML === value) {
-                // console.log( '88888', a[i].innerHTML === value)
-                newParagragh.push(a[i].innerHTML)
-            } else if (a[i].nodeName === "SPAN" && a[i].innerHTML === '') {
-                console.log('88888', i, a[i].innerHTML === "")
-            }
-            else if (a[i].nodeName === "#text" && a[i].textContent ==='') {
-                console.log('77777', i, a[i].textContent === "")
-            }
-            else if (a[i].nodeName === "#text" && a[i].textContent !=='') {
-                newParagragh.push(a[i].textContent)
-            }
-            else {
-                newParagragh.push(a[i]);
-            };
-        };
-        console.log('55555', newParagragh)
-        const toString = newParagragh.toString().split(',').join('')
-        console.log('993333', toString)
-        document.getElementsByClassName('paragraph').innerHTML = toString
-        console.log('Pork', document.getElementsByClassName('paragraph').innerHTML = toString)
+        const a = document.getElementById(value);
+        console.log('hhhuhu', a);
+        let normal_node = document.createTextNode(a.innerText);
+        a.parentNode.insertBefore(normal_node,a);
+        a.remove()
+        
+        // const newParagragh = [];
+        // for (let i = 0; i < a.length; i++) {
+        //     console.log('11111', a)
+        //     // console.log('2222', a[i])
+        //     if (a[i].nodeName === "SPAN" && a[i].innerHTML === value) {
+        //         // console.log( '88888', a[i].innerHTML === value)
+        //         newParagragh.push(a[i].innerHTML)
+        //     } else if (a[i].nodeName === "SPAN" && a[i].innerHTML === '') {
+        //         console.log('88888', i, a[i].innerHTML === "")
+        //     }
+        //     else if (a[i].nodeName === "#text" && a[i].textContent === '') {
+        //         console.log('77777', i, a[i].textContent === "")
+        //     }
+        //     else if (a[i].nodeName === "#text" && a[i].textContent !== '') {
+        //         newParagragh.push(a[i].textContent)
+        //     }
+        //     else {
+        //         newParagragh.push(a[i]);
+        //     };
+        // };
+        // console.log('55555', newParagragh)
+        // const toString = newParagragh.toString().split(',').join('')
+        // const newNode = document.createElement("p");
+        // const textNode = document.createTextNode(toString)
+        // newNode.appendChild(textNode)
+        // console.log('993333', toString)
+        // const list = document.getElementsByClassName('paragraph')[0]
+        // list.appendChild(textNode)
+        // console.log('Pork', document.getElementsByClassName('paragraph').innerHTML = toString)
 
     }
     return (

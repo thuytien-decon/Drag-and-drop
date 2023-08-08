@@ -26,6 +26,7 @@ export default function InputFieldSentence(props) {
             // tạo hightlight
             let contentSpanElement = document.createElement('span');
             contentSpanElement.setAttribute('class', "highlight");
+            contentSpanElement.setAttribute('id', `${string}`);
             contentSpanElement.textContent = string;
             contentSpanElement.style.backgroundColor = 'yellow';
             contentSpanElement.style.color = 'darkblue';
