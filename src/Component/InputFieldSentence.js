@@ -1,12 +1,14 @@
-import { useFormikContext } from "formik";;
+import { useFormikContext } from "formik";
+import { useEffect } from "react";
 
 export default function InputFieldSentence(props) {
-    const { field, form, type, label, setPosition, setShowTooltip, position, showTooltip } = props;
+    const { field, form, label, setPosition, setShowTooltip, position, setSelectString, delkey, setSentence } = props;
     const { name, value, onChange, onBlur } = field
     const { setFieldValue } = useFormikContext();
 
     const handleInput = (e) => {
         setFieldValue(name, e.currentTarget.innerText)
+        setSentence(e.currentTarget.innerText)
         setShowTooltip(false)
     }
     const handleSelect = (e) => {
@@ -31,8 +33,10 @@ export default function InputFieldSentence(props) {
             range.deleteContents();
             range.insertNode(contentSpanElement);
             setShowTooltip(true)
+            setSelectString(string)
         } else {
             setShowTooltip(false)
+            setSelectString('')
             let parentNode = getSelection.focusNode.parentNode.childNodes;
             // console.log('parentElement', parentNode);
             let newChild = [];
@@ -53,14 +57,12 @@ export default function InputFieldSentence(props) {
     const handleClick = () => {
         if (position.x === 0 && position.y === 0){
             setShowTooltip(false)
-            console.log('sadasdsadasdasdasdas', showTooltip)
         } else {
             setShowTooltip(true)
         }
     }
-
     return (
-        <div name={name} contentEditable="true" onInput={handleInput} onMouseUp={handleSelect} onClick={handleClick}>
+        <div className='paragraph' name={name} contentEditable="true" onInput={handleInput} onMouseUp={handleSelect} onClick={handleClick}>
     
         </div>
     )

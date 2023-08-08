@@ -1,7 +1,8 @@
 import { useState } from "react"
+import { useFormikContext } from "formik";
 import './TooltipDND.css';
 export default function TooltipDND(props) {
-    const { position, setShowTooltip, showTooltip, setInputkey, inputkey } = props
+    const { position, setShowTooltip, showTooltip, setInputkey, inputkey, addWordToListAns } = props
     let style = {
         left: `${position.left + position.width}px`,
         top: `${position.top + 20}px`,
@@ -17,10 +18,11 @@ export default function TooltipDND(props) {
         }
     const handleClick = () => {
         setShowTooltip(false)
+        addWordToListAns(inputkey)
     }
     return (
         <div style={style} className="tooltip">
-            <input type="text" onChange={(e)=>setInputkey(e.target.value)} />
+            <input type="text" value={inputkey} onChange={(e)=>setInputkey(e.target.value)} />
             <i onClick={handleClick} className="fa-solid fa-pen-fancy" style={{ color: '#79E0EE' }}></i>
         </div>
     )

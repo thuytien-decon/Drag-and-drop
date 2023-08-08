@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ModalforquestionDND from "../Component/ModalforquestionDND ";
+import ModalforquestionDND from "../Component/ModalforquestionDND";
 import './EditDragAndDropTest.css';
 
 
