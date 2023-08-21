@@ -6,28 +6,37 @@ import './EditDragAndDropTest.css';
 export default function EditDragAndDropTest (){
     const [openModal, setOpenModal] = useState(false)
     const [type, setType] = useState('add')
-    const [selectQuestion, setSelectQuestion] = useState('')
+    const [selectQuestion, setSelectQuestion] = useState({sentence: '',
+    ans: {},
+    others: []})
     const [show, setShow] = useState([])
-    const handleEditQuestion = () =>{
-        console.log('aaaa')
+    const handleEditQuestion = (element) =>{
+        console.log('aaaa', element)
+        setSelectQuestion(element)
+        setOpenModal(true);
+        setType('edit')
     }
-    const handleDelQuestion = () =>{
+    const handleDelQuestion = (id) =>{
+        let afterDelArray = show.filter(el => el.id != id)
+        setShow(afterDelArray)
         console.log('bbbb')
     }
 
     useEffect (()=>{
         const init = [
             {
+                id: 0,
                 sentence: "Charlie Shrem was an early [A] of cryptocurrency, earning millions of dollars trading [B]",
                 ans: {
-                    A: 'apostle',
-                    B: 'bitcoin'
+                    A: {value:'apostle', index:0},
+                    B: {value:'bitcoin', index:1}
                 },
                 others: ['poultry', 'stroll', 'blast', 'hitherto']
             },{
+                id: 1,
                 sentence: "Tesla soon felt he was not being given due [A] or enough financial compensation from Edison:",
                 ans: {
-                    A: 'credit'
+                    A: {value:'credit', index:0}
                 },
                 others: ['nightstand', 'chromosomes', 'incandescent', 'inhibitor']
             }
@@ -39,7 +48,9 @@ export default function EditDragAndDropTest (){
              <div className='question-list'>
                 <div className='question addNew' onClick={() => {
                     setOpenModal(true); 
-                    setSelectQuestion(''); 
+                    setSelectQuestion({sentence: '',
+                    ans: {},
+                    others: []}); 
                     setType('add')
                     }}>
                     <h2>Add New Question</h2>
@@ -56,7 +67,7 @@ export default function EditDragAndDropTest (){
                     )
                 })}
             </div>
-            {openModal && <ModalforquestionDND openOrClose={setOpenModal} select={selectQuestion} setSelect={setSelectQuestion} type={type}/>} 
+            {openModal && <ModalforquestionDND openOrClose={setOpenModal} selectQuestion={selectQuestion} setSelectQuestion={setSelectQuestion} type={type} setShow={setShow} show={show}/>} 
         </div>
     )
 }

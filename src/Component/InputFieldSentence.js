@@ -1,11 +1,23 @@
 import { useFormikContext } from "formik";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function InputFieldSentence(props) {
-    const { field, form, label, setPosition, setShowTooltip, position, setSelectString, delkey, setSentence } = props;
+    const { field,
+        form,
+        label,
+        setPosition,
+        setShowTooltip,
+        position,
+        setSelectString,
+        setSentence,
+        sentence,
+        setCounter } = props;
     const { name, value, onChange, onBlur } = field
+    const { errors, touched } = form
+    const showError = errors[name] && touched[name]
+    const [counterOfField, setCounterOfField] = useState(0)
     const { setFieldValue } = useFormikContext();
-
+    // console.log('form', form)
     const handleInput = (e) => {
         setFieldValue(name, e.currentTarget.innerText)
         setSentence(e.currentTarget.innerText)
@@ -26,7 +38,7 @@ export default function InputFieldSentence(props) {
             // tạo hightlight
             let contentSpanElement = document.createElement('span');
             contentSpanElement.setAttribute('class', "highlight");
-            contentSpanElement.setAttribute('id', `${string}`);
+            contentSpanElement.setAttribute('id', `${string}_${counterOfField}`);
             contentSpanElement.textContent = string;
             contentSpanElement.style.backgroundColor = 'yellow';
             contentSpanElement.style.color = 'darkblue';
@@ -35,6 +47,8 @@ export default function InputFieldSentence(props) {
             range.insertNode(contentSpanElement);
             setShowTooltip(true)
             setSelectString(string)
+            setCounterOfField(pre => pre + 1)
+            setCounter(counterOfField)
         } else {
             setShowTooltip(false)
             setSelectString('')
@@ -56,15 +70,18 @@ export default function InputFieldSentence(props) {
         }
     }
     const handleClick = () => {
-        if (position.x === 0 && position.y === 0){
+        if (position.x === 0 && position.y === 0) {
             setShowTooltip(false)
         } else {
             setShowTooltip(true)
         }
-    }
+    }    
+
     return (
-        <div className='paragraph' name={name} contentEditable="true" onInput={handleInput} onMouseUp={handleSelect} onClick={handleClick}>
-    
+        <div className="sentence-wrapper">
+            <div className='paragraph' name={name} contentEditable="true" onInput={handleInput} onMouseUp={handleSelect} onClick={handleClick}>
+            </div>
+            {showError && <p style={{ margin: 0, padding: 0, color: "red", fontSize: "10px", textAlign: "start", width: '100%', fontFamily: 'Poppins' }} className="text-danger">{errors[name]}</p>}
         </div>
     )
 } 
